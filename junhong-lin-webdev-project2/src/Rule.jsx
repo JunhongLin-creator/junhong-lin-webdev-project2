@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 export default function Rule(){
     return (
         <div>
-            <Link to={"/"}>Home</Link>
             <h1>Rules of battleship</h1>
             <p>
             <h3>Rules for BattleShip (a Milton Bradley Game)</h3>

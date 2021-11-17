@@ -8,17 +8,29 @@ import Board from './Board'
 import WelcomePage from './WelcomePage';
 import reducers from './reducers/reducers';
 import { createStore} from 'redux'
+import Rule from './Rule'
 
 const store = createStore(reducers);
+
+const Header=()=>{
+  return(
+    <div>
+      <span><Link to={"/"}>Home </Link> </span>
+      <span><Link to={"/rule"}>Rules of battleship </Link></span>
+
+    </div>
+  )
+}
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-      <Link to={"/"}>Home</Link>
+        <Header/>
         <Routes>
           <Route path="/" element={<WelcomePage/>} />
           <Route path="/gameBoard/:gameType" element={<Board />} />
+          <Route path="/rule" element={<Rule/>} />
         </Routes>
       </Router>
     </Provider>
