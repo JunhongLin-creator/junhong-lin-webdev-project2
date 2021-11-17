@@ -12,6 +12,7 @@ ReactDOM.render(
       <Router>
         <Routes>
           <Route path="/" element={<WelcomePage/>} />
+          <Route path="/gameBoard/:gameType" element={<Board />} />
         </Routes>
       </Router>
     </Provider>
