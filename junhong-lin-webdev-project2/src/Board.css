@@ -1,5 +1,17 @@
-#board {
+#playerBoard {
     display: grid;
-    grid-template-columns: repeat(10, 10px);
-    grid-template-rows: repeat(10, 10px);
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+    margin-right:50px;
+}
+
+#opponentBoard {
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(10, 30px);
+}
+
+#container{
+    display:flex;
+    align-items: center;
 }

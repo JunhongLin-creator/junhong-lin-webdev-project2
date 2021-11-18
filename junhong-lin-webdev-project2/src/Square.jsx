@@ -5,7 +5,7 @@ import './Square.css';
 
 export function Square(props) {
 
-    const {status,type} = props;
+    const {status,boardType,gameType} = props;
 
     const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ export function Square(props) {
             x:props.x,
             y:props.y,
         })
-    }} id="square" class={borderColor}>
-        {symbol}
+    }} id="square" x={props.x} y ={props.y}>
+        {status}
     </div>);
 }
