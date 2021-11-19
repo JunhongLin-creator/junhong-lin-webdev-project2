@@ -33,7 +33,7 @@ export function Square(props) {
         //normal game
         if(boardType=='playerGrid'){//the board which holds ai ships
             if(status==''||status=='ship'){
-                return;
+                return '';
             }else if(status =='hit'){
                 return 'O'
             }else if(status == 'miss'){
@@ -42,7 +42,7 @@ export function Square(props) {
         }else if(boardType=='opponentGrid'){
             //the board which holds player ships
             if(status==''){
-                return;
+                return '';
             }else if(status=='ship'){
                 return '*';
             }else if(status =='hit'){
@@ -51,6 +51,6 @@ export function Square(props) {
                 return 'X'
             }
         }
-        return;
+        return '';
     }
 }

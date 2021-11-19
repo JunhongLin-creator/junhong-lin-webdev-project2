@@ -26,9 +26,9 @@ each other.&nbsp; No ships may be placed on another ship.&nbsp; </p>
 <p>The 5 ships are:&nbsp; Carrier (occupies 5 spaces), Battleship (4), Cruiser
 (3), Submarine (3), and Destroyer (2).&nbsp;&nbsp;</p>
 <h3><a name="playing">Playing the Game</a></h3>
-<p>Player's take turns guessing by calling out the coordinates. The opponent
+<p>Both player and ai's ships are randomly generated, with player's ships marked by '*'. Player's take turns guessing by calling out the coordinates. The opponent
 responds with &quot;hit&quot; or &quot;miss&quot; as appropriate.&nbsp; Both
-players should mark their board with pegs:&nbsp; red for hit, white for miss.
+players should mark their board with pegs:&nbsp; 'O' for hit, 'X' for miss.
 For example, if you call out F6 and your opponent does not have any ship located
 at F6, your opponent would respond with &quot;miss&quot;.&nbsp; You record the
 miss F6 by placing a white peg on the lower part of your board at F6.&nbsp; Your

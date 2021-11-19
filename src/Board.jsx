@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import ResetButton from './ResetButton';
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
-import {GameEndMessage} from './GameEndMessage';
+import { GameEndMessage } from './GameEndMessage';
 
 export default function Board() {
 
@@ -23,8 +23,8 @@ export default function Board() {
         }
 
     }
-    console.dir(boards['playerGrid'])//check status of the generated board
-    console.dir(boards['opponentGrid'])//check status of the generated board
+    // console.dir(boards['playerGrid'])//check status of the generated board
+    // console.dir(boards['opponentGrid'])//check status of the generated board
 
     return (
         <div>
