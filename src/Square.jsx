@@ -13,6 +13,7 @@ export function Square(props) {
         dispatch({
             type: 'boardClick',
             boardType:props.boardType,
+            gameType:props.gameType,
             x: props.x,
             y: props.y,
         })
@@ -25,6 +26,31 @@ export function Square(props) {
             y:props.y,
         })
     }} id="square" x={props.x} y ={props.y}>
-        {status}
+        {showSymbol(status,boardType)}
     </div>);
+
+    function showSymbol(status,boardType){
+        //normal game
+        if(boardType=='playerGrid'){//the board which holds ai ships
+            if(status==''||status=='ship'){
+                return;
+            }else if(status =='hit'){
+                return 'O'
+            }else if(status == 'miss'){
+                return 'X'
+            }
+        }else if(boardType=='opponentGrid'){
+            //the board which holds player ships
+            if(status==''){
+                return;
+            }else if(status=='ship'){
+                return '*';
+            }else if(status =='hit'){
+                return 'O'
+            }else if(status == 'miss'){
+                return 'X'
+            }
+        }
+        return;
+    }
 }

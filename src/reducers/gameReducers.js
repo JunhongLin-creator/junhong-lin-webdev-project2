@@ -4,22 +4,30 @@ function gridGenerator() {
     for (let i = 0; i < length; i++) {
         let row = [];
         for (let j = 0; j < length; j++) {
-            row.push('');  //five status of a tile: 1.empty, 2. hit 3.miss 4.hover 5.hasship         
+            row.push('');  //five status of a tile: 1.empty, 2. hit 3.miss 4.hover 5.ship         
        }
        grid.push(row);
     }
     // insert random boats
     // 5 boats of length 5,4,3,3,2
-    grid = generateBoats(grid);
+    grid = generateBoats(grid,ships);
     return grid;
 }
 
-function generateBoats(grid){
-    // generateCarrier(grid);
-    // generateBattleship(grid);
-    // generateCruiser(grid);
-    // generateSubmarine(grid);
-    // generateDestroyer(grid);
+const ships= {
+    carrier:5,
+    battleship:4,
+    cruiser:3,
+    submarine:3,
+    destroyer:2,
+}
+
+function generateBoats(grid,ships){
+    generateShip(grid,ships.carrier);
+    generateShip(grid,ships.battleship);
+    generateShip(grid,ships.cruiser);
+    generateShip(grid,ships.submarine);
+    generateShip(grid,ships.destroyer);
     return grid;
 
     function isOccupied(grid,x,y,length,direction){
@@ -42,38 +50,48 @@ function generateBoats(grid){
         }
         return isTaken;
     }
-    function generateCarrier(grid){
-        while(true){
-        //pick a direction for the boat;
-        const direction = Math.floor(Math.random()*2);
-        //pick a position for the ship and verify it it is valid to put it in
-        let x, y=0;
+    function placeShip(grid,x,y,length,direction){
         if(direction){
-            x = Math.floor(Math.random()*6);
-             y = Math.floor(Math.random()*10);
+            //vertical
+            for (let i = 0; i < length; i++) {
+                grid[x+i][y] = 'ship';    
+            }
         }else{
-            x = Math.floor(Math.random()*10);
-            y = Math.floor(Math.random()*6);
-        }
-        if(isOccupied(grid,x,y,5,direction)){
-            continue;
-        } else{
-            if(!direction){
-                //horizontol
-
-            }else{
-                //vertical
+            //horizontol
+            for (let i = 0; i < length; i++) {
+                grid[x][y+i] = 'ship';    
             }
         }
-        
-        
-    }}
+    }
+    function generateShip(grid,length){
+        while(true){
+        //pick a direction for the boat;
+            const direction = Math.floor(Math.random()*2);
+            //pick a position for the ship and verify it it is valid to put it in
+            let x, y=0;
+            let max = grid.length-length+1;
+            if(direction){//vertical
+                x = Math.floor(Math.random()*max);
+                y = Math.floor(Math.random()*grid.length);
+            }else{//horizontol
+                x = Math.floor(Math.random()*grid.length);
+                y = Math.floor(Math.random()*max);
+            }
+            if(isOccupied(grid,x,y,length,direction)){
+                continue;
+            } else{
+                placeShip(grid,x,y,length,direction);
+                break;
+            }       
+        }
+    }
 }
 
 function generateGameBoard(){
     const boards = {
         playerGrid: [],
         opponentGrid:[],
+        winner:'',
     }
     boards.playerGrid = gridGenerator();
     boards.opponentGrid = gridGenerator();
@@ -87,29 +105,68 @@ export default function gameReducer(state, action) {
 
     }
 
-    if (action.type === "CREATE_GAME_BOARD") {
-        alert("created a game board!")
-    }
-
     //deal with boardClick event
     if (action.type === 'boardClick') {
-        const value = state[action.boardType][action.x][action.y];
+        const status = state[action.boardType][action.x][action.y];
+        const {boardType,gameType,x,y} = action;
+        //deal with freePlay game
+        if(gameType =='freePlay'){
+            updateBoard(x,y);
+        }else if(gameType == 'normal'){        //deal with normal game
+            
+        }
+        function updateBoard(x,y){
+            //TODO: example
+            if(status==''){
+                //the shot missed
+                state[boardType][x][y] = 'miss';
+            }else if(status=='ship'){
+                //the shot hit a ship
+                state[boardType][x][y] = 'hit';
+            }
+        }
 
         // check winning condition
-
-        return [...state];
+        //if there is no 'ship' status on the grid, the game ends
+        let endFlag = true;
+        for (let i = 0; i < state[boardType].length; i++) {
+            const row = state[boardType][i];
+            for (let j = 0; j < row.length; j++) {
+                const status = row[j];
+                if(status=='ship'){
+                    endFlag==false;
+                }
+            }
+        }
+        if(endFlag){//game ends
+            let winner = '';
+            if(boardType=='playerGrid'){
+                winner='AI';
+            }else if(boardType=='opponentGrid'){
+                winner = 'Player';
+            }
+            state['winner']=winner;
+        }
+        let result = {
+            ...state,
+        }
+        return result;
     }
     
     //reset the board
     if (action.type === 'RESET') {
+        //clear the board
         for (let i = 0; i < state['playerGrid'].length; i++) {
             for (let j = 0; j < state['playerGrid'].length; j++){
                 state['playerGrid'][i][j] = '';
                 state['opponentGrid'][i][j] = '';
             }
         }
+        state = generateGameBoard();
         // return [...state];
-        let result = state;
+        let result = {
+            ...state,
+        }
         return result;
     }
     return state;
