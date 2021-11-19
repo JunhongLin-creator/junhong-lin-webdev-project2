@@ -2,4 +2,24 @@
     border: 1px solid black;
     height: 30px;
     width: 30px;
+    text-align: center;
+}
+
+.green{
+    background-color: lightgreen;
+}
+
+.green:hover{
+    background-color:darkgreen;
+}
+.red{
+    background-color:red;
+}
+
+.red:hover{
+    background-color: darkred;
+}
+
+.empty:hover{
+    background-color: lightgrey;
 }

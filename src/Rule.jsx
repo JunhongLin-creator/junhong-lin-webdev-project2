@@ -6,7 +6,6 @@ export default function Rule(){
         <div>
             <h1>Rules of battleship</h1>
             <p>
-            <h3>Rules for BattleShip (a Milton Bradley Game)</h3>
 <h3><a name="objective"><b>Game Objective</b></a></h3>
 <p>The object of Battleship is to try and sink all of the other player's before
 they sink all of your ships. All of the other player's ships are somewhere on

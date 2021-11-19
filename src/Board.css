@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: repeat(10, 30px);
     grid-template-rows: repeat(10, 30px);
-    margin-right:50px;
 }
 
 #opponentBoard {
@@ -13,5 +12,16 @@
 
 #container{
     display:flex;
+    flex-wrap: wrap;
     align-items: center;
+    width: 100%;
+    gap:50px;
+    height:800px;
+    align-items: flex-start;
+}
+
+@media (max-width:600px){
+    #playerBoard{
+        width:100%;
+    }
 }

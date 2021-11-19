@@ -30,7 +30,7 @@ export default function Board() {
         <div>
             <ResetButton text="Reset"/>
             <h3>{"This is an " + gameType + " game"}</h3>
-            <h4>Try to hit enemy ships on the left board, your opponent will try to hit your ships on the right board</h4>
+            <h4>Try to hit enemy ships on the first board, your opponent will try to hit your ships on the second(right or below) board</h4>
             <GameEndMessage winner={boards['winner']} />
             <div id="container">
                 <div id="playerBoard">

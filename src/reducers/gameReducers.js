@@ -23,11 +23,9 @@ const ships= {
 }
 
 function generateBoats(grid,ships){
-    generateShip(grid,ships.carrier);
-    generateShip(grid,ships.battleship);
-    generateShip(grid,ships.cruiser);
-    generateShip(grid,ships.submarine);
-    generateShip(grid,ships.destroyer);
+    for (const ship in ships) {
+        generateShip(grid,ships[ship]);
+    }
     return grid;
 
     function isOccupied(grid,x,y,length,direction){
